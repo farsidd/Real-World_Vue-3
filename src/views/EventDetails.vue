@@ -1,19 +1,27 @@
 <template>
-<router-link :to="{name: 'EventDetails', params: {id: event.id}}">
   <div class="event-card">
-    <span>@{{ event.time }} on {{ event.date }}</span>
     <h4>{{ event.title }}</h4>
+    <p>{{event.description}}</p>
   </div>
-</router-link>
 </template>
 
 <script>
+import EventService from '@/services/EventService.js'
 export default {
-  props: {
-    event: {
-      type: Object,
-      required: true
+props: ['id'],
+data() {
+    return {
+        event: null,
     }
+},
+    created() {
+    EventService.getEvent(this.id)
+      .then(response => {
+        this.event = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>

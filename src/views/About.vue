@@ -1,5 +1,22 @@
 <template>
   <div class="about">
-    <p>A site for events to better the world.</p>
+    <input @keyup="btn" v-model="msg">
   </div>
 </template>
+<script>
+
+
+export default {
+  data() {
+    return {
+      msg: ''
+    }
+  },
+  methods: {
+    btn() {
+      console.log(this.msg)
+    }
+  }
+
+}
+</script>
